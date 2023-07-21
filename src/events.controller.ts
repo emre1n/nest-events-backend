@@ -46,8 +46,7 @@ export class EventsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id) {
-    console.log('typeof id', typeof id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.repository.findOneBy({
       id: id,
     });
