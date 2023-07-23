@@ -15,20 +15,20 @@ export class TrainingController {
 
   @Post('/create')
   public async savingRelation() {
-    const subject = new Subject();
-    subject.name = 'Math';
+    // const subject = new Subject();
+    // subject.name = 'Math';
 
     // const subject = await this.subjectRepository.findOneBy({ id: 3 });
+    const subject = await this.subjectRepository.findOneBy({ id: 3 });
 
-    const teacher1 = new Teacher();
-    teacher1.name = 'John Doe';
+    // const teacher1 = new Teacher();
+    // teacher1.name = 'John Doe';
 
-    const teacher2 = new Teacher();
-    teacher2.name = 'Harry Doe';
+    // const teacher2 = new Teacher();
+    // teacher2.name = 'Harry Doe';
 
-    subject.teachers = [teacher1, teacher2];
-
-    await this.subjectRepository.save(subject);
+    // subject.teachers = [teacher1, teacher2];
+    // await this.teacherRepository.save([teacher1, teacher2]);
 
     // await this.teacherRepository.save([teacher1, teacher2]);
 
@@ -40,32 +40,37 @@ export class TrainingController {
     // user.profile = null;
     // Save the user here
 
-    // const teacher1 = await this.teacherRepository.findOneBy({ id: 5 });
-    // const teacher2 = await this.teacherRepository.findOneBy({ id: 6 });
+    const teacher1 = await this.teacherRepository.findOneBy({ id: 5 });
+    const teacher2 = await this.teacherRepository.findOneBy({ id: 6 });
 
-    // return await this.subjectRepository
-    //   .createQueryBuilder()
-    //   .relation(Subject, 'teachers')
-    //   .of(subject)
-    //   .add([teacher1, teacher2]);
+    return await this.subjectRepository
+      .createQueryBuilder()
+      .relation(Subject, 'teachers')
+      .of(subject)
+      .add([teacher1, teacher2]);
   }
 
   @Post('/remove')
   public async removingRelation() {
-    const subject = await this.subjectRepository.find({
-      where: { id: 1 },
-      relations: ['teachers'],
-    });
+    // const subject = await this.subjectRepository.find({
+    //   where: { id: 1 },
+    //   relations: ['teachers'],
+    // });
 
-    subject[0].teachers = subject[0].teachers.filter(
-      (teacher) => teacher.id !== 2,
-    );
+    // subject[0].teachers = subject[0].teachers.filter(
+    //   (teacher) => teacher.id !== 2,
+    // );
 
-    await this.subjectRepository.save(subject);
+    // await this.subjectRepository.save(subject);
     // await this.subjectRepository
     //   .createQueryBuilder('s')
     //   .update()
     //   .set({ name: 'Confidential' })
     //   .execute();
+    await this.subjectRepository
+      .createQueryBuilder('s')
+      .update()
+      .set({ name: 'Confidential' })
+      .execute();
   }
 }
