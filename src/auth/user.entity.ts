@@ -9,6 +9,7 @@ import {
 import { Profile } from './profile.entity';
 import { Event } from 'src/events/event.entity';
 import { Expose } from 'class-transformer';
+import { Attendee } from 'src/events/attendee.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -42,4 +43,7 @@ export class User {
   @OneToMany(() => Event, (event) => event.organizer)
   @Expose()
   organized: Event[];
+
+  @OneToMany(() => Attendee, (attendee) => attendee.user)
+  attended: Attendee[];
 }
