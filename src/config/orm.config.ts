@@ -9,6 +9,7 @@ import { Teacher } from './../school/teacher.entity';
 
 import { Profile } from './../auth/profile.entity';
 import { User } from './../auth/user.entity';
+import { Course } from './../school/course.entity';
 
 export default registerAs(
   'orm.config',
@@ -19,7 +20,7 @@ export default registerAs(
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: [Event, Attendee, Subject, Teacher, User, Profile],
+    entities: [Event, Attendee, Subject, Teacher, User, Profile, Course],
     synchronize: true,
     dropSchema: Boolean(parseInt(process.env.DB_DROP_SCHEMA)),
   }),
