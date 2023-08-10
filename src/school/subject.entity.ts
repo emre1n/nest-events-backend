@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Teacher } from './teacher.entity';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-@InputType('SubjectInput')
+
 @Entity()
 @ObjectType()
 export class Subject {
@@ -21,5 +21,5 @@ export class Subject {
 
   @ManyToMany(() => Teacher, (teacher) => teacher.subjects, { cascade: true })
   @JoinTable()
-  teachers: Teacher[];
+  teachers: Promise<Teacher[]>;
 }
